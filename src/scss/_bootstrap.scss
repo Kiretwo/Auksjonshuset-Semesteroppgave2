@@ -1,0 +1,24 @@
+// Import Bootstrap's functions
+@use 'bootstrap/scss/functions' with (
+  // You can override function variables here if needed
+);
+
+// Import your custom variables, overriding Bootstrap's defaults
+@use 'variables' with (
+  $primary: $primary,
+  $secondary: $secondary,
+  $font-family-base: $font-family-base,
+  // Include other variables as needed
+);
+
+// Import Bootstrap's mixins
+@use 'bootstrap/scss/mixins';
+
+// Import Bootstrap's utilities and components
+@use 'bootstrap/scss/utilities';
+@use 'bootstrap/scss/root';
+@use 'bootstrap/scss/reboot';
+@use 'bootstrap/scss/type';
+@use 'bootstrap/scss/buttons';
+@use 'bootstrap/scss/forms';
+// Add other components as needed

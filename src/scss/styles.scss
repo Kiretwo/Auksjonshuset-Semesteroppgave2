@@ -1,7 +1,6 @@
-/* Customize Bootstrap variables before importing */
-$primary: #007bff;
-$secondary: #6c757d;
-$font-family-base: 'Helvetica Neue', Arial, sans-serif;
+/* Import custom variables before main bootstrap sass file */
+@import 'variables'; /* /src/scss/_variables.scss */
+@import '../../node_modules/bootstrap/scss/bootstrap';
 
 /* Import Bootstrap's functions, variables, and mixins */
 @import 'bootstrap/scss/functions';

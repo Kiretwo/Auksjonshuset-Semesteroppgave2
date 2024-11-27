@@ -1,0 +1,17 @@
+// Example mixin for text styles
+@mixin text-style($size, $weight: normal, $color: $body-color) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+// Mixin for responsive media queries
+@mixin respond-to($breakpoint) {
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Invalid breakpoint: '#{$breakpoint}'";
+  }
+}
