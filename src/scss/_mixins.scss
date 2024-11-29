@@ -1,17 +1,27 @@
-// Example mixin for text styles
-@mixin text-style($size, $weight: normal, $color: $body-color) {
-  font-size: $size;
-  font-weight: $weight;
-  color: $color;
+@use "variables";
+@use "sass:map";
+@use "sass:color";
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-// Mixin for responsive media queries
-@mixin respond-to($breakpoint) {
-  @if map-has-key($grid-breakpoints, $breakpoint) {
-    @media (min-width: map-get($grid-breakpoints, $breakpoint)) {
-      @content;
-    }
-  } @else {
-    @warn "Invalid breakpoint: '#{$breakpoint}'";
+@mixin button-style($color-name) {
+  $base-color: map.get(variables.$colors, $color-name);
+  background-color: $base-color;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-family: variables.$font-stack;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: color.adjust(
+      map.get(variables.$colors, $color-name),
+      $lightness: -10%
+    );
   }
 }

@@ -1,0 +1,11 @@
+@use '../../node_modules/bootstrap/scss/functions';
+@use '../../node_modules/bootstrap/scss/variables';
+
+@use 'base/reset';
+@use 'variables';
+@use 'mixins';
+
+@use '../../node_modules/bootstrap/scss/bootstrap';
+
+@use 'components/header';
+@use 'components/footer';
