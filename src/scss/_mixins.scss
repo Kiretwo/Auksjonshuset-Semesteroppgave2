@@ -1,6 +1,4 @@
 @use "variables";
-@use "sass:map";
-@use "sass:color";
 
 @mixin flex-center {
   display: flex;
@@ -18,10 +16,4 @@
   font-family: variables.$font-stack;
   cursor: pointer;
   transition: background-color 0.3s;
-  &:hover {
-    background-color: color.adjust(
-      map.get(variables.$colors, $color-name),
-      $lightness: -10%
-    );
-  }
 }

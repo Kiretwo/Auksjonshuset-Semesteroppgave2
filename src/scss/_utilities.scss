@@ -1,0 +1,10 @@
+@use 'variables';
+
+// Custom text color classes
+.text-custom-primary {
+  color: variables.$primary-color;
+}
+
+.text-custom-secondary {
+  color: variables.$secondary-color;
+}

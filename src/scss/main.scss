@@ -1,11 +1,12 @@
-@use '../../node_modules/bootstrap/scss/functions';
-@use '../../node_modules/bootstrap/scss/variables';
-
-@use 'base/reset';
 @use 'variables';
+
+@use 'bootstrap' as bs;
+
+// Base and custom styles
+@use 'base/reset';
 @use 'mixins';
-
-@use '../../node_modules/bootstrap/scss/bootstrap';
-
 @use 'components/header';
 @use 'components/footer';
+
+// Custom utilities
+@use 'utilities';
