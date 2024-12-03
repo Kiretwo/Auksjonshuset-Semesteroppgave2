@@ -1,5 +1,6 @@
 import "bootstrap";
 import "./scss/main.scss";
+import { initHeader } from "./js/ui/components/header.js";
 
 function getCurrentPage() {
   // Retrieves the value of the 'data-page' attribute from the <body> tag
@@ -16,7 +17,7 @@ async function init() {
     switch (page) {
       case "home":
         const homeModule = await import("./js/ui/home.js");
-        homeModule.init();
+        homeModule.initHome();
         break;
       /*
       case "login":

@@ -10,3 +10,39 @@
 
 // Custom utilities
 @use 'utilities';
+
+// Custom components
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+// Styles for smaller screens
+@media (max-width: 991.98px) {
+  .header-buttons {
+    display: none;
+  }
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .footer-menu-btn {
+    display: block;
+  }
+}
+
+// Styles for larger screens
+@media (min-width: 992px) {
+  footer {
+    display: none;
+  }
+  .footer-menu-btn {
+    display: none;
+  }
+}
