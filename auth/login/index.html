@@ -7,6 +7,65 @@
   <script type="module" src="/src/main.js"></script>
 </head>
 <body data-page="login">
+      <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img
+            src="/images/noroff-logo.png"
+            alt="Noroff Logo"
+            style="height: 40px"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="/profile/" class="nav-link">My Profile</a>
+            </li>
+            <li class="nav-item">
+              <a
+                href="/post/create/"
+                id="create-post-button"
+                class="nav-link hidden"
+                >Create Post</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="/auth/login/" id="login-link" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="/auth/register/" id="register-link" class="nav-link"
+                >Register</a
+              >
+            </li>
+            <li class="nav-item">
+              <button
+                id="logout"
+                class="nav-link btn btn-link hidden"
+                style="cursor: pointer"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="container my-4">
+      <section id="feed" class="row g-4">Loading...</section>
+    </main>
   <button id="helloButton">Click Me</button>
 </body>
 </html>

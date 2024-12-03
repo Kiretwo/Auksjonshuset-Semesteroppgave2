@@ -1,3 +1,4 @@
+import "bootstrap";
 import "./scss/main.scss";
 
 function getCurrentPage() {
@@ -9,11 +10,15 @@ async function init() {
   const page = getCurrentPage();
 
   try {
+
+    initHeader();
+
     switch (page) {
       case "home":
         const homeModule = await import("./js/ui/home.js");
         homeModule.init();
         break;
+      /*
       case "login":
         const loginModule = await import("./js/ui/login.js");
         loginModule.init();
@@ -22,7 +27,6 @@ async function init() {
         const registerModule = await import("./js/ui/register.js");
         registerModule.init();
         break;
-      /*  
       case "profile":
         const profileModule = await import("./ui/profile/profile.js");
         profileModule.init();
