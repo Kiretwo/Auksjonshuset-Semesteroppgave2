@@ -56,6 +56,3 @@ async function init() {
     console.error("Error loading page module:", error);
   }
 }
-
-// Initialize the application
-init();

@@ -33,7 +33,12 @@ main {
     width: 100%;
   }
   .footer-menu-btn {
+    @include mixins.reset-button-styles;
     display: block;
+
+    i {
+      font-size: 1.8rem;
+    }
   }
 }
 
