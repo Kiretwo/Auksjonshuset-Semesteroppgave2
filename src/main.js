@@ -1,11 +1,14 @@
 import "bootstrap";
 import "./scss/main.scss";
 import { initHeader } from "./js/ui/components/header.js";
+import { initSidebar } from "./js/ui/components/sidebar.js";
 
 function getCurrentPage() {
   // Retrieves the value of the 'data-page' attribute from the <body> tag
   return document.body.getAttribute("data-page");
 }
+
+document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
   const page = getCurrentPage();
@@ -13,6 +16,7 @@ async function init() {
   try {
 
     initHeader();
+    initSidebar();
 
     switch (page) {
       case "home":
