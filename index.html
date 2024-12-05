@@ -11,7 +11,17 @@
   <!-- Header -->
   <header class="bg-light py-2">
     <div class="container d-flex justify-content-between align-items-center">
-      <a class="navbar-brand" href="#">Auksjonshuset</a>
+      <div class="d-flex align-items-center">
+        <a class="navbar-brand" href="/">
+          <img
+            src="./images/greek-pillar.png"
+            alt="Auksjonshuset logo"
+          >
+        </a>
+        <h1 class="mb-0">
+          <a href="/" class="text-decoration-none text-dark">Auksjonshuset</a>
+        </h1>
+      </div>
       <div class="header-buttons">
         <button class="btn btn-primary me-2" data-action="login">Login</button>
         <button class="btn btn-secondary" data-action="register">Register</button>
@@ -26,9 +36,15 @@
 
 <!-- Footer -->
 <footer class="bg-dark">
-  <div class="container d-flex justify-content-end align-items-center py-2">
+  <div class="container d-flex justify-content-between align-items-center py-2">
+    <button class="btn btn-outline-secondary footer-btn d-flex flex-column align-items-center"
+      type="button"
+    >
+      <i class="fa-solid fa-home"></i>
+      <small>Home</small>
+    </button>
     <button
-      class="btn btn-outline-secondary footer-menu-btn d-flex flex-column align-items-center"
+      class="btn btn-outline-secondary footer-btn d-flex flex-column align-items-center"
       type="button"
       data-action="toggle-sidebar"
       aria-controls="offcanvasSidebar"

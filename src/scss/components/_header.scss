@@ -1,0 +1,15 @@
+@use "../variables" as var;
+
+.navbar-brand {
+  img {
+    height: 70px;
+  }
+}
+
+header {
+  h1 {
+    font-family: var.$header-font;
+    font-size: 1.7rem;
+    font-weight: 400;
+  }
+}

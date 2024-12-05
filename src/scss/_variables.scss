@@ -1,5 +1,11 @@
-// Color Variables
+@import url('https://fonts.googleapis.com/css2?family=Montagu+Slab:opsz,wght@16..144,100..700&display=swap');
+
+// Variables
+
+// Colors
 $primary-color: #d91d13 !default;
 $secondary-color: #2ecc71;
-$font-color: #333;
-$font-stack: "Helvetica Neue", Arial, sans-serif;
+$text-color: #333;
+
+// Fonts
+$header-font: "Montagu Slab", Arial, sans-serif;

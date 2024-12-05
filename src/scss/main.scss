@@ -1,4 +1,4 @@
-@use 'variables';
+@use 'variables' as var;
 
 @use 'bootstrap' as bs;
 
@@ -23,7 +23,7 @@ main {
 }
 
 // Styles for smaller screens
-@media (max-width: 991.98px) {
+@include bs.media-breakpoint-down(lg) {
   .header-buttons {
     display: none;
   }
@@ -32,22 +32,22 @@ main {
     bottom: 0;
     width: 100%;
   }
-  .footer-menu-btn {
-    @include mixins.reset-button-styles;
+  .footer-btn {
+    @include mixins.reset-button-styles();
     display: block;
 
     i {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     }
   }
 }
 
 // Styles for larger screens
-@media (min-width: 992px) {
+@include bs.media-breakpoint-up(lg) {
   footer {
     display: none;
   }
-  .footer-menu-btn {
+  .footer-btn {
     display: none;
   }
 }
