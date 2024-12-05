@@ -2,6 +2,7 @@ import "bootstrap";
 import "./scss/main.scss";
 import { initHeader } from "./js/ui/components/header.js";
 import { initSidebar } from "./js/ui/components/sidebar.js";
+import { initSearch } from "./js/ui/components/search.js";
 
 function getCurrentPage() {
   // Retrieves the value of the 'data-page' attribute from the <body> tag
@@ -17,6 +18,7 @@ async function init() {
 
     initHeader();
     initSidebar();
+    initSearch();
 
     switch (page) {
       case "home":

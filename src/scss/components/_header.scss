@@ -7,9 +7,68 @@
 }
 
 header {
+  background-color: var.$background-header;
+  .logo-text {
+    color: var.$text-header;
+  }
   h1 {
     font-family: var.$header-font;
     font-size: 1.7rem;
     font-weight: 400;
+  }
+}
+
+.header-login-btn {
+  background-color: red;
+}
+
+// Search Bar
+.search-form {
+  flex: 1;
+  max-width: 300px;
+  margin: 0 15px;
+  position: relative;
+}
+
+.form-control {
+  border-radius: 8px;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+// Styling the search results container
+.search-results {
+  display: none;
+  z-index: 100;
+  position: absolute;
+  top: 100%;  // ensures it appears below the input
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 0.25rem; // equivalent to mt-1
+
+  // Header inside the results box
+  .search-results-header {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+    background-color: #f8f9fa;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  // Styles for each result item
+  div:not(.search-results-header) {
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
   }
 }

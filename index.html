@@ -9,7 +9,7 @@
 </head>
 <body data-page="home">
   <!-- Header -->
-  <header class="bg-light py-2">
+  <header class="py-2">
     <div class="container d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center">
         <a class="navbar-brand" href="/">
@@ -19,12 +19,17 @@
           >
         </a>
         <h1 class="mb-0">
-          <a href="/" class="text-decoration-none text-dark">Auksjonshuset</a>
+          <a href="/" class="text-decoration-none logo-text">Auksjonshuset</a>
         </h1>
       </div>
+      <!-- Search Bar -->
+      <form class="d-flex position-relative search-form" role="search" id="searchForm">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+        <div id="searchResults" class="search-results"></div>
+      </form>
       <div class="header-buttons">
-        <button class="btn btn-primary me-2" data-action="login">Login</button>
-        <button class="btn btn-secondary" data-action="register">Register</button>
+        <button class="btn btn-primary me-2 header-login-btn" data-action="login">Login</button>
+        <button class="btn btn-secondary" data-action="register">Sign Up</button>
       </div>
     </div>
   </header>
@@ -35,7 +40,7 @@
   </main>
 
 <!-- Footer -->
-<footer class="bg-dark">
+<footer>
   <div class="container d-flex justify-content-between align-items-center py-2">
     <button class="btn btn-outline-secondary footer-btn d-flex flex-column align-items-center"
       type="button"
@@ -81,7 +86,7 @@
         <button class="btn btn-primary w-100 my-2" data-action="login">Login</button>
       </li>
       <li class="nav-item">
-        <button class="btn btn-secondary w-100" data-action="register">Register</button>
+        <button class="btn btn-secondary w-100" data-action="register">Sign Up</button>
       </li>
     </ul>
   </div>
@@ -117,7 +122,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="registerModalLabel">Register</h5>
+          <h5 class="modal-title" id="registerModalLabel">Sign Up</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -134,7 +139,7 @@
               <label for="registerConfirmPassword" class="form-label">Confirm Password</label>
               <input type="password" class="form-control" id="registerConfirmPassword" required>
             </div>
-            <button type="submit" class="btn btn-secondary">Register</button>
+            <button type="submit" class="btn btn-secondary">Sign Up</button>
           </form>
         </div>
       </div>

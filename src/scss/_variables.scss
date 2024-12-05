@@ -3,9 +3,32 @@
 // Variables
 
 // Colors
-$primary-color: #d91d13 !default;
-$secondary-color: #2ecc71;
-$text-color: #333;
+
+// Background Colors
+$background-body: #343A40; // Background for the body (main content area)
+$background-header: #212529; // Background for the header
+$background-footer: #212529; // Background for the footer
+$background-card: #D9D9D9; // Background for the cards
+
+// Text Colors
+$text-primary: #343A40; // Primary text color inside cards
+$text-secondary: #495057; // Secondary text color inside cards (e.g., for meta info)
+$text-inverse: #FFFFFF; // Text color for buttons, header, and footer (on dark backgrounds)
+$text-header: #F8F9FA; // Text color for the header
+
+// Button Colors
+$button-primary: #20C997; // Background for "Bid on Listing" buttons
+$button-secondary: #343A40; // Background for "View Listing" buttons
+
+// Border Colors
+$border-light: #CED4DA; // Light borders for cards and other elements
+
+// Icon Colors
+$icon-default: #495057; // Default color for icons (e.g., in header or footer)
+
+// Accent Colors (Optional)
+$accent-success: #198754; // Success messages or highlights
+$accent-warning: #FFC107; // Warning messages or highlights
 
 // Fonts
 $header-font: "Montagu Slab", Arial, sans-serif;
