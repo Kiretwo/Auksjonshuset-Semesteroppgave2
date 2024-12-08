@@ -6,8 +6,8 @@ export async function onLogin(event) {
 
   // Get form data
   const form = event.target;
-  const email = form.querySelector('#loginEmail').value;
-  const password = form.querySelector('#loginPassword').value;
+  const email = form.querySelector("#loginEmail").value;
+  const password = form.querySelector("#loginPassword").value;
 
   const userData = { email, password };
 
