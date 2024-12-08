@@ -13,7 +13,8 @@ $background-card: #D9D9D9; // Background for the cards
 // Text Colors
 $text-primary: #343A40; // Primary text color inside cards
 $text-secondary: #495057; // Secondary text color inside cards (e.g., for meta info)
-$text-inverse: #FFFFFF; // Text color for buttons, header, and footer (on dark backgrounds)
+$text-primary-inverse: #EAEAEA; // Text color for cards and other elements (on dark backgrounds)
+$text-secondary-inverse: #FFFFFF; // Text color for buttons (on dark backgrounds)
 $text-header: #F8F9FA; // Text color for the header
 
 // Button Colors
