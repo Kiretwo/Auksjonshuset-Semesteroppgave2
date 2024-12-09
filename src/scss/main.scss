@@ -28,6 +28,19 @@ main {
   color: var.$text-primary-inverse;
 }
 
+// Listing
+.listing {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+#show-more-button[hidden] {
+  display: none !important; // Hides the button when user reaches the end of the listings
+}
+
+
 // Styles for smaller screens
 @include bs.media-breakpoint-down(lg) {
   .header-buttons {
