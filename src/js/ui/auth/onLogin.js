@@ -1,3 +1,4 @@
+import { Modal } from "bootstrap";
 import { loginUser } from "../../api/auth/login.js";
 
 export async function onLogin(event) {
@@ -18,6 +19,15 @@ export async function onLogin(event) {
     // Log the result and redirect the user to the home page
     console.log("Login successful:", result);
     //window.location.href = "/";
+
+    // Reset the form
+    form.reset();
+
+    // Close the modal with a slight delay
+    setTimeout(() => {
+      const modal = Modal.getInstance(document.querySelector("#loginModal"));
+      modal.hide();
+    }, 100);
   } catch (error) {
     console.error("Error logging in:", error);
     alert("Login failed. Please check your credentials and try again.");

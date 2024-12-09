@@ -49,12 +49,15 @@ export async function onRegister(event) {
     // Show a success message
     alert("Registration successful. Please login to continue.");
 
+    // Reset the form
+    form.reset();
+    
     // Close the modal with a slight delay
     setTimeout(() => {
       const modal = Modal.getInstance(document.querySelector("#registerModal"));
       modal.hide();
     }, 100);
-    
+
   } catch (error) {
     console.error("Error registering user:", error);
     alert(
