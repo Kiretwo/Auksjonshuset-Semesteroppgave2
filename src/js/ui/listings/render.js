@@ -21,7 +21,6 @@ export async function renderListings(
     const end = start + PAGE_LIMIT;
     const listingsToRender = allListings.slice(start, end);
 
-    // Fetch bids for each listing before rendering
     const updatedListings = await Promise.all(
       listingsToRender.map(async (listing) => {
         try {
@@ -52,37 +51,44 @@ export async function renderListings(
         hour12: true,
       })}`;
 
-      const bidsList = Array.isArray(listing.bids)
-        ? listing.bids
-            .slice(0, 3)
+      // Sort bids by amount (highest first) and take the top 3
+      const sortedBids = Array.isArray(listing.bids)
+        ? listing.bids.sort((a, b) => b.amount - a.amount).slice(0, 3)
+        : [];
+
+      // Generate bid content
+      const bidsList = sortedBids.length
+        ? sortedBids
             .map(
               (bid) =>
-                `<li>${bid.username || "Unknown user"} bids <strong>$${
-                  bid.amount || 0
-                }</strong></li>`
+                `<div class="bid-item d-flex justify-content-between">
+                  <span>${bid.bidder?.name || "Unknown"} bids</span>
+                  <strong>$${bid.amount}</strong>
+                </div>`
             )
             .join("")
-        : "<li>No bids yet</li>";
+        : "<div class='bid-item'>No bids yet</div>";
 
       const innerHTML = `
         <div class="d-flex justify-content-between align-items-start mb-2">
           <p class="text-muted mb-0 text-time"><i class="fa-solid fa-clock"></i> ${formattedTime}</p>
         </div>
-        <div class="d-flex align-items-start">
+        <div class="d-flex align-items-start mb-3">
           <img
             src="${
               listing.media?.[0]?.url || "./images/no_image_placeholder.png"
             }"
             alt="${listing.media?.[0]?.alt || "Listing image"}"
             class="listing-img me-3"
-            style="width: 37px; height: 37px; object-fit: cover;"
           />
-          <div class="listing-details">
+          <div class="listing-details flex-grow-1">
             <h5 class="fw-bold text-truncate">${listing.title}</h5>
-            <ul class="list-unstyled mb-3">${bidsList}</ul>
           </div>
         </div>
-        <div class="mt-3 d-flex justify-content-between">
+        <div class="bids-container mb-3">
+          ${bidsList}
+        </div>
+        <div class="mt-auto d-flex justify-content-between">
           <button class="btn btn-success" onclick="bidOnListing('${
             listing.id
           }')">Bid on Listing</button>
@@ -108,4 +114,9 @@ export async function renderListings(
   } catch (error) {
     console.error("Error rendering listings:", error);
   }
+
+  window.viewListing = function (listingId) {
+    // Navigate to the detailed listing page
+    window.location.href = `/listing/index.html?id=${listingId}`;
+  };
 }
