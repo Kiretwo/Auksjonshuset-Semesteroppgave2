@@ -26,6 +26,10 @@ async function init() {
         const homeModule = await import("./js/ui/home.js");
         homeModule.initHome();
         break;
+      case "listing-detail":
+        const listingDetailsModule = await import("./js/ui/listings/detail.js");
+        listingDetailsModule.initListingDetails();
+        break;
       /*
       case "login":
         const loginModule = await import("./js/ui/login.js");

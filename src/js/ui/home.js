@@ -1,4 +1,4 @@
-import { renderListings } from "./listings/renderListings.js";
+import { renderListings } from "./listings/render.js";
 
 export function initHome() {
   console.log("Home module loaded");
