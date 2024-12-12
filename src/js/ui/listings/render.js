@@ -62,7 +62,7 @@ export async function renderListings(
             .map(
               (bid) =>
                 `<div class="bid-item d-flex justify-content-between">
-                  <span>${bid.bidder?.name || "Unknown"} bids</span>
+                  <span><strong>${bid.bidder?.name || "Unknown"}</strong> bids</span>
                   <strong>$${bid.amount}</strong>
                 </div>`
             )

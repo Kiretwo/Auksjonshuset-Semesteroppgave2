@@ -40,7 +40,7 @@ export async function fetchListingBids(listingId) {
     }
     const data = await response.json();
     console.log("Listing bids:", data.data);
-    return data.data; // Ensure this data contains `bids`
+    return data.data;
   } catch (error) {
     console.error("Error fetching listing bids:", error);
     throw error;

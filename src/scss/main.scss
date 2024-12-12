@@ -120,6 +120,13 @@ main {
   }
 }
 
+.img-contain {
+  height: 300px; // Adjust this height as needed
+  object-fit: contain; // Ensures the image maintains its aspect ratio
+  background-color: var.$text-secondary; // Adds background for contrast
+  border-radius: 4px;
+}
+
 
 
 
