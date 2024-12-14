@@ -47,3 +47,19 @@ export async function fetchListingBids(listingId) {
   }
 }
 
+export async function fetchSearchResults(query) {
+  try {
+    const response = await fetch(
+      `${API_AUCTION_LISTINGS}/search?q=${encodeURIComponent(query)}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch search results");
+    }
+    const data = await response.json();
+    return data.data; // Return the search results
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    throw error;
+  }
+}
+

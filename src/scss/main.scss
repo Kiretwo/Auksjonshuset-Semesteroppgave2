@@ -127,6 +127,16 @@ main {
   border-radius: 4px;
 }
 
+// Search Result Styles
+.search-result-item {
+  transition: border-radius 0.3s, background-color 0.3s;
+  border-radius: 10px;
+}
+
+.search-result-item:hover {
+  background-color: #f8f9fa;
+  border-radius: 10px; /* Ensure corners stay rounded */
+}
 
 
 

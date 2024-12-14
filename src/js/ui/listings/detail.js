@@ -1,7 +1,4 @@
-import {
-  fetchListingDetails,
-  fetchListingBids,
-} from "../../api/listings/read.js";
+import { fetchListingDetails, fetchListingBids, } from "../../api/listings/read.js";
 
 export async function initListingDetails() {
   const params = new URLSearchParams(window.location.search);

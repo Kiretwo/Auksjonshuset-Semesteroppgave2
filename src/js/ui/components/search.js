@@ -1,23 +1,10 @@
+import { fetchSearchResults } from "../../api/listings/read.js";
+import { renderListings } from "../listings/render.js";
+
 export function initSearch() {
   const searchForm = document.getElementById("searchForm");
   const searchInput = document.getElementById("searchInput");
   const searchResults = document.getElementById("searchResults");
-
-  // Function to simulate fetching search results
-  // Replace this with real API logic as needed
-  async function fetchSearchResults(query) {
-    // For demonstration, use dummy results:
-    const dummyResults = [
-      "Greek Vase",
-      "Roman Coin",
-      "Egyptian Painting",
-      "Persian Rug",
-      "Chinese Porcelain",
-    ];
-    return dummyResults.filter((item) =>
-      item.toLowerCase().includes(query.toLowerCase())
-    );
-  }
 
   // Show dynamic results as the user types
   searchInput.addEventListener("input", async () => {
@@ -28,48 +15,74 @@ export function initSearch() {
       return;
     }
 
-    const results = await fetchSearchResults(query);
+    try {
+      const results = await fetchSearchResults(query);
 
-    if (results.length > 0) {
-      searchResults.innerHTML = `
-        <div class="search-results-header">Results:</div>
-        ${results.map((item) => `<div class="p-2">${item}</div>`).join("")}
-      `;
-      searchResults.style.display = "block";
-    } else {
-      searchResults.innerHTML = `
-        <div class="p-2 text-muted">No results found</div>
-      `;
-      searchResults.style.display = "block";
+      if (results.length > 0) {
+        searchResults.innerHTML = `
+          <div class="search-results-header">Results:</div>
+          ${results
+            .map(
+              (result) =>
+                `<div class="p-2 search-result-item d-flex align-items-center" data-id="${
+                  result.id
+                }">
+                  <img
+                    src="${
+                      result.media?.[0]?.url ||
+                      "/images/no_image_placeholder.png"
+                    }"
+                    alt="${result.media?.[0]?.alt || "Listing image"}"
+                    class="rounded me-2"
+                    style="width: 40px; height: 40px; object-fit: cover;"
+                  />
+                  <strong>${result.title}</strong>
+                </div>`
+            )
+            .join("")}
+        `;
+        searchResults.style.display = "block";
+      } else {
+        searchResults.innerHTML = `
+          <div class="p-2 text-muted">No results found</div>
+        `;
+        searchResults.style.display = "block";
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error);
     }
   });
 
-  // Hide results when clicking outside the form
-  document.addEventListener("click", (event) => {
-    if (!searchForm.contains(event.target)) {
-      searchResults.style.display = "none";
-    }
-  });
-
-  // Handle search on Enter key press (form submission)
-  searchForm.addEventListener("submit", (event) => {
+  // Handle form submission to update main content area
+  searchForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const query = searchInput.value.trim();
     if (query) {
-      console.log(`Searching for: ${query}`);
-      // Implement your final search logic here, such as:
-      // window.location.href = `/search?query=${encodeURIComponent(query)}`;
+      try {
+        const results = await fetchSearchResults(query);
+
+        // Update the main content area with search results
+        const container = document.querySelector("#listings-container");
+        container.innerHTML = ""; // Clear current listings
+        results.forEach((listing) => {
+          renderListings("#listings-container", listing);
+        });
+
+        // Hide search suggestions after submission
+        searchResults.style.display = "none";
+      } catch (error) {
+        console.error("Error rendering search results:", error);
+      }
     }
   });
 
-  // Handle selecting a suggestion by clicking on it
+  // Handle result click to navigate to the detail page
   searchResults.addEventListener("click", (event) => {
-    if (event.target.matches("div.p-2")) {
-      const selectedText = event.target.textContent;
-      searchInput.value = selectedText;
-      searchResults.style.display = "none";
-      console.log(`Selected: ${selectedText}`);
-      // Implement logic if you want to search immediately after selection
+    if (event.target.closest(".search-result-item")) {
+      const listingId = event.target.closest(".search-result-item").dataset.id;
+      searchInput.value = ""; // Clear the input
+      searchResults.style.display = "none"; // Hide dropdown
+      window.location.href = `/listing/index.html?id=${listingId}`; // Navigate to detail page
     }
   });
 }
