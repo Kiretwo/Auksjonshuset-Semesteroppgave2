@@ -17,15 +17,26 @@ export async function initListingDetails() {
     const title = listing.title || "No Title Available";
     const description = listing.description || "No description available.";
     const endsAtDate = new Date(listing.endsAt);
-    const formattedTime = `Ends at: ${endsAtDate.toLocaleDateString("en-US", {
-      month: "2-digit",
-      day: "2-digit",
-      year: "2-digit",
-    })} ${endsAtDate.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    })}`;
+    const now = new Date();
+
+    // Determine what to display for time
+    let timeDisplay;
+    if (endsAtDate < now) {
+      // If the current time is past the end time
+      timeDisplay = "Ended";
+    } else {
+      // Otherwise, format the end time as before
+      timeDisplay = `Ends at: ${endsAtDate.toLocaleDateString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "2-digit",
+      })} ${endsAtDate.toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      })}`;
+    }
+
     const createdAt = listing.created
       ? new Date(listing.created).toLocaleString()
       : "N/A";
@@ -90,7 +101,7 @@ export async function initListingDetails() {
               />
               <h2 class="mb-0 text-truncate">${title}</h2>
             </div>
-            <p class="text-muted mb-0 text-time"><i class="fa-solid fa-clock"></i> ${formattedTime}</p>
+            <p class="text-muted mb-0 text-time"><i class="fa-solid fa-clock"></i> ${timeDisplay}</p>
           </div>
           <div class="mb-4">${mediaContent}</div>
           <p><strong>Description:</strong> ${description}</p>
@@ -98,7 +109,7 @@ export async function initListingDetails() {
         </div>
 
         <!-- Bid Section -->
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-2">
           <div class="card p-4 shadow-sm">
             <h2>Place Your Bid</h2>
             <form id="bidForm">
@@ -120,7 +131,7 @@ export async function initListingDetails() {
       </div>
 
       <!-- Recent Bids Section -->
-      <div class="row">
+      <div class="row recent-bids">
         <div class="col-lg-8">
           <div class="card p-4 shadow-sm">
             <h2>Recent Bids</h2>
@@ -135,7 +146,7 @@ export async function initListingDetails() {
 
     // Initialize real-time bid updates
     updateBids(listingId);
-    setInterval(() => updateBids(listingId), 300000); // Update every 30 seconds
+    setInterval(() => updateBids(listingId), 300000); // Update every 5 minutes (300000 ms)
   } catch (error) {
     console.error("Error fetching listing details:", error);
     container.innerHTML =
