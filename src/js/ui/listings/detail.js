@@ -1,4 +1,5 @@
 import { fetchListingDetails, fetchListingBids, } from "../../api/listings/read.js";
+import { placeBid, fetchProfile } from "../../api/listings/bid.js";
 
 export async function initListingDetails() {
   const params = new URLSearchParams(window.location.search);
@@ -22,10 +23,8 @@ export async function initListingDetails() {
     // Determine what to display for time
     let timeDisplay;
     if (endsAtDate < now) {
-      // If the current time is past the end time
       timeDisplay = "Ended";
     } else {
-      // Otherwise, format the end time as before
       timeDisplay = `Ends at: ${endsAtDate.toLocaleDateString("en-US", {
         month: "2-digit",
         day: "2-digit",
@@ -145,8 +144,15 @@ export async function initListingDetails() {
     `;
 
     // Initialize real-time bid updates
-    updateBids(listingId);
-    setInterval(() => updateBids(listingId), 300000); // Update every 5 minutes (300000 ms)
+    await updateBids(listingId);
+    setInterval(() => updateBids(listingId), 300000); // Update every 5 minutes
+
+    // Add event listener to the bid form
+    const bidForm = document.querySelector("#bidForm");
+    bidForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      await handleBidSubmission(listingId);
+    });
   } catch (error) {
     console.error("Error fetching listing details:", error);
     container.innerHTML =
@@ -179,7 +185,71 @@ async function updateBids(listingId) {
           </div>`
       )
       .join("");
+
+    return sortedBids;
   } catch (error) {
     console.error("Error updating bids:", error);
+  }
+}
+
+async function handleBidSubmission(listingId) {
+  const accessToken = localStorage.getItem("accessToken");
+  if (!accessToken) {
+    alert("You must be logged in to place a bid.");
+    return;
+  }
+
+  const bidInput = document.querySelector("#bidAmount");
+  const bidAmount = parseInt(bidInput.value, 10);
+  if (isNaN(bidAmount) || bidAmount <= 0) {
+    alert("Please enter a valid bid amount.");
+    return;
+  }
+
+  // Get the current highest bid
+  const listing = await fetchListingBids(listingId);
+  const bids = listing.bids || [];
+  const highestBid =
+    bids.length > 0 ? Math.max(...bids.map((b) => b.amount)) : 0;
+  if (bidAmount <= highestBid) {
+    alert(
+      `Your bid must be higher than the current highest bid of $${highestBid}.`
+    );
+    return;
+  }
+
+  // Check user's credits
+  let userProfile;
+  try {
+    userProfile = await fetchProfile();
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    alert("Failed to verify your credits. Please try again.");
+    return;
+  }
+
+  if (!userProfile) {
+    alert("You must be logged in to place a bid.");
+    return;
+  }
+
+  const userCredits = userProfile.credits; // Adjust based on actual profile data structure
+  if (bidAmount > userCredits) {
+    alert(
+      `You don't have enough credits. You have $${userCredits}, but tried to bid $${bidAmount}.`
+    );
+    return;
+  }
+
+  // Place the bid via the API
+  try {
+    await placeBid(listingId, bidAmount);
+    // Update the bids list
+    await updateBids(listingId);
+    alert("Your bid has been placed successfully!");
+    bidInput.value = "";
+  } catch (error) {
+    console.error("Error placing bid:", error);
+    alert("Error placing your bid. Please try again.");
   }
 }

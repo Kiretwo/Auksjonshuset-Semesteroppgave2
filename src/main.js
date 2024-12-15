@@ -4,6 +4,7 @@ import { initHeader } from "./js/ui/components/header.js";
 import { initSidebar } from "./js/ui/components/sidebar.js";
 import { initSearch } from "./js/ui/components/search.js";
 import { setupAuthListeners } from "./js/ui/auth/authListener.js";
+import { setLogoutListener } from "./js/ui/global/logout.js";
 
 function getCurrentPage() {
   // Retrieves the value of the 'data-page' attribute from the <body> tag
@@ -20,6 +21,7 @@ async function init() {
     initSidebar();
     initSearch();
     setupAuthListeners();
+    setLogoutListener();
 
     switch (page) {
       case "home":

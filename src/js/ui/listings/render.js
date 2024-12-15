@@ -62,8 +62,8 @@ export async function renderListings(
             .map(
               (bid) =>
                 `<div class="bid-item d-flex justify-content-between">
-                  <span><strong>${bid.bidder?.name || "Unknown"}</strong> bids</span>
-                  <strong>$${bid.amount}</strong>
+                  <span>${bid.bidder?.name || "Unknown"} bids</span>
+                  $${bid.amount}
                 </div>`
             )
             .join("")
@@ -89,10 +89,7 @@ export async function renderListings(
           ${bidsList}
         </div>
         <div class="mt-auto d-flex justify-content-between">
-          <button class="btn btn-success" onclick="bidOnListing('${
-            listing.id
-          }')">Bid on Listing</button>
-          <button class="btn btn-secondary" onclick="viewListing('${
+          <button class="btn btn-secondary view-listing-btn" onclick="viewListing('${
             listing.id
           }')">View Listing</button>
         </div>

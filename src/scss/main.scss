@@ -47,7 +47,7 @@ main {
   border-radius: 10px;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  height: 250px;
+  height: 245px;
 
   &:hover {
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
@@ -62,6 +62,10 @@ main {
     height: 42px;
     object-fit: cover;
     border-radius: 5px;
+  }
+
+  .view-listing-btn {
+    font-weight: 500;
   }
 
   .listing-details {
@@ -83,20 +87,10 @@ main {
       font-size: 0.875rem;
       margin-bottom: 1rem;
     }
-
-    ul {
-      padding-left: 0;
-      list-style: none;
-
-      li {
-        font-size: 0.875rem;
-        margin-bottom: 0.25rem;
-      }
-    }
   }
 
   .btn {
-    width: 48%; // Ensures the buttons are evenly spaced below the content
+    width: 100%;
   }
 
   .btn-success {
@@ -120,9 +114,10 @@ main {
   }
 }
 
+// Detail Carousel Styles
 .img-contain {
-  height: 300px; // Adjust this height as needed
-  object-fit: contain; // Ensures the image maintains its aspect ratio
+  height: 300px;
+  object-fit: contain;
   background-color: var.$text-secondary; // Adds background for contrast
   border-radius: 4px;
 }
@@ -132,10 +127,9 @@ main {
   transition: border-radius 0.3s, background-color 0.3s;
   border-radius: 10px;
 }
-
 .search-result-item:hover {
   background-color: #f8f9fa;
-  border-radius: 10px; /* Ensure corners stay rounded */
+  border-radius: 10px; // Ensure corners stay rounded
 }
 
 // Listing Details Styles
