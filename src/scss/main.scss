@@ -28,6 +28,122 @@ main {
   color: var.$text-primary-inverse;
 }
 
+// Show More Button
+#show-more-button[hidden] {
+  display: none !important; // Completely hide the button when no more listings
+}
+
+.text-heading {
+  color: var.$text-primary-inverse;
+}
+
+// Listing Styles
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 245px;
+
+  &:hover {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .text-time {
+    font-size: 0.875rem;
+  }
+
+  .listing-img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .view-listing-btn {
+    font-weight: 500;
+  }
+
+  .listing-details {
+    width: 100px;
+    flex-grow: 1;
+
+    h5 {
+      margin-top: 0.2rem;
+      font-size: 1.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; // Prevents overflowing long text
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      padding-bottom: 0.1rem;
+    }
+
+    p {
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+
+    &:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+
+    &:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+    }
+  }
+}
+
+// Detail Carousel Styles
+.img-contain {
+  height: 300px;
+  object-fit: contain;
+  background-color: var.$text-secondary; // Adds background for contrast
+  border-radius: 4px;
+}
+
+// Search Result Styles
+.search-result-item {
+  transition: border-radius 0.3s, background-color 0.3s;
+  border-radius: 10px;
+}
+.search-result-item:hover {
+  background-color: #f8f9fa;
+  border-radius: 10px; // Ensure corners stay rounded
+}
+
+// Listing Details Styles
+#listing-details {
+  .text-time {
+    margin-top: 12px;
+  }
+  .recent-bids {
+    margin-bottom: 120px;
+  }
+}
+
+
+
 // Styles for smaller screens
 @include bs.media-breakpoint-down(lg) {
   .header-buttons {
@@ -46,6 +162,23 @@ main {
       font-size: 1.5rem;
     }
   }
+
+  .listing {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+
+    h5 {
+      font-size: 1.1rem;
+    }
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+  }
 }
 
 // Styles for larger screens
@@ -55,5 +188,10 @@ main {
   }
   .footer-btn {
     display: none;
+  }
+
+  .listing {
+    padding: 2rem;
+    gap: 2rem;
   }
 }
