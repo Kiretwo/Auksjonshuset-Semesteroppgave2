@@ -98,6 +98,10 @@ export async function initHeader() {
     const createBtn = document.getElementById("create-button");
     if (createBtn) {
       createBtn.classList.remove("d-none");
+      // Add event listener directly to the element
+      createBtn.addEventListener("click", () => {
+        window.location.href = "/listing/create/";
+      });
     }
   } else {
     // Not logged in

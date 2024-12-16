@@ -20,7 +20,7 @@ export async function fetchAllListings() {
 // Fetch a single listing by its ID
 export async function fetchListingDetails(listingId) {
   try {
-    const response = await fetch(`${API_AUCTION_LISTINGS}/${listingId}`);
+    const response = await fetch(`${API_AUCTION_LISTINGS}/${listingId}?_seller=true`);
     if (!response.ok) {
       throw new Error("Failed to fetch listing details");
     }

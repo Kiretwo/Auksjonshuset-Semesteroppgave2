@@ -1,5 +1,6 @@
 import { fetchListingDetails, fetchListingBids, } from "../../api/listings/read.js";
 import { placeBid, fetchProfile } from "../../api/listings/bid.js";
+import { deleteListing } from "../../api/listings/delete.js";
 
 export async function initListingDetails() {
   const params = new URLSearchParams(window.location.search);
@@ -83,6 +84,21 @@ export async function initListingDetails() {
         `
         : `<img src="/images/no_image_placeholder.png" alt="No image available" class="img-fluid rounded mb-3">`;
 
+    // Determine if current user is seller
+    let isSeller = false;
+    const accessToken = localStorage.getItem("accessToken");
+    let userProfile = null;
+    if (accessToken) {
+      try {
+        userProfile = await fetchProfile();
+        if (listing.seller && listing.seller.name === userProfile.name) {
+          isSeller = true;
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    }
+
     // Render listing details
     container.innerHTML = `
       <div class="row mt-4">
@@ -109,7 +125,7 @@ export async function initListingDetails() {
 
         <!-- Bid Section -->
         <div class="col-lg-4 mb-2">
-          <div class="card p-4 shadow-sm">
+          <div class="bid-card card p-4 shadow-sm">
             <h2>Place Your Bid</h2>
             <form id="bidForm">
               <div class="mb-3">
@@ -125,6 +141,12 @@ export async function initListingDetails() {
               </div>
               <button type="submit" class="btn btn-success w-100">Place Bid</button>
             </form>
+            ${
+              // If the user is the seller, show the "Delete Listing" button
+              isSeller
+                ? `<button id="deleteListingBtn" class="btn btn-danger w-100 mt-3">Delete Listing</button>`
+                : ``
+            }
           </div>
         </div>
       </div>
@@ -153,6 +175,26 @@ export async function initListingDetails() {
       event.preventDefault();
       await handleBidSubmission(listingId);
     });
+
+    // If user is seller, add listener to delete button
+    if (isSeller) {
+      const deleteBtn = document.getElementById("deleteListingBtn");
+      deleteBtn.addEventListener("click", async () => {
+        const confirmDelete = confirm(
+          "Are you sure you want to delete this listing?"
+        );
+        if (confirmDelete) {
+          try {
+            await deleteListing(listingId);
+            alert("Listing deleted successfully!");
+            window.location.href = "/";
+          } catch (error) {
+            console.error("Error deleting listing:", error);
+            alert("Failed to delete the listing. Please try again.");
+          }
+        }
+      });
+    }
   } catch (error) {
     console.error("Error fetching listing details:", error);
     container.innerHTML =
@@ -206,19 +248,13 @@ async function handleBidSubmission(listingId) {
     return;
   }
 
-  // Get the current highest bid
+  // Fetch listing details to check seller and current highest bid
   const listing = await fetchListingBids(listingId);
   const bids = listing.bids || [];
   const highestBid =
     bids.length > 0 ? Math.max(...bids.map((b) => b.amount)) : 0;
-  if (bidAmount <= highestBid) {
-    alert(
-      `Your bid must be higher than the current highest bid of $${highestBid}.`
-    );
-    return;
-  }
 
-  // Check user's credits
+  // Check user profile
   let userProfile;
   try {
     userProfile = await fetchProfile();
@@ -233,6 +269,21 @@ async function handleBidSubmission(listingId) {
     return;
   }
 
+  // If the logged-in user is the seller of this listing, show alert and return
+  if (listing.seller && listing.seller.name === userProfile.name) {
+    alert("You cannot bid on your own listing.");
+    return;
+  }
+
+  // Check bid amount vs highest bid
+  if (bidAmount <= highestBid) {
+    alert(
+      `Your bid must be higher than the current highest bid of $${highestBid}.`
+    );
+    return;
+  }
+
+  // Check user's credits
   const userCredits = userProfile.credits;
   if (bidAmount > userCredits) {
     alert(
@@ -278,4 +329,3 @@ async function handleBidSubmission(listingId) {
     alert("Error placing your bid. Please try again.");
   }
 }
-

@@ -14,9 +14,4 @@ export function initHome() {
   document.querySelector(showMoreButton).addEventListener("click", () => {
     renderListings(listingsContainer, showMoreButton);
   });
-
-  // Add event listener to "Create Listing" button
-  document.querySelector(createButton).addEventListener("click", () => {
-    window.location.href = "./listing/create/";
-  });
 }
