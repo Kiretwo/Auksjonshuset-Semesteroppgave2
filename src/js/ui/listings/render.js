@@ -13,8 +13,11 @@ export async function renderListings(
 
   try {
     if (allListings.length === 0) {
-      const response = await fetchAllListings();
-      allListings = response.data;
+      const listings = await fetchAllListings();
+      allListings = listings;
+
+      // Sort by created date descending
+      allListings.sort((a, b) => new Date(b.created) - new Date(a.created));
     }
 
     const start = (currentPage - 1) * PAGE_LIMIT;
@@ -114,6 +117,6 @@ export async function renderListings(
 
   window.viewListing = function (listingId) {
     // Navigate to the detailed listing page
-    window.location.href = `/listing/index.html?id=${listingId}`;
+    window.location.href = `/listing/?id=${listingId}`;
   };
 }

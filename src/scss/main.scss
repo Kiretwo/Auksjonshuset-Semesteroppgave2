@@ -1,5 +1,4 @@
 @use 'variables' as var;
-
 @use 'bootstrap' as bs;
 
 // Base and custom styles
@@ -34,6 +33,10 @@ main {
 }
 
 .text-heading {
+  color: var.$text-primary-inverse;
+}
+
+#user-info {
   color: var.$text-primary-inverse;
 }
 
@@ -142,56 +145,88 @@ main {
   }
 }
 
+#main-detail, #main-create, #main-profile {
+  color: var.$text-primary-inverse;
+}
 
+// Responsive and Layout Adjustments
 
-// Styles for smaller screens
+// Smaller screens - show sticky footer, hide large screen footer
 @include bs.media-breakpoint-down(lg) {
-  .header-buttons {
-    display: none;
+  .home-main, #main-create, #main-profile {
+    padding-bottom: 100px; // Adjust padding to account for sticky footer
   }
-  footer {
+
+  .header-buttons {
+    display: none !important;
+  }
+
+  #user-info {
+    display: none !important; // Hide user info in header on small screens
+  }
+
+  // The sticky footer is visible on small screens
+  .sticky-footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    background: #222; // adjust as needed
+    color: #ccc; // adjust as needed
+    z-index: 1000;
   }
+
   .footer-btn {
     @include mixins.reset-button-styles();
     display: block;
+    background: none;
+    border: none;
+    color: #ccc; // adjust color as needed
 
     i {
       font-size: 1.5rem;
     }
-  }
 
-  .listing {
-    padding: 1rem;
-    gap: 1rem;
-  }
-
-  .card {
-    padding: 1rem;
-
-    h5 {
-      font-size: 1.1rem;
+    small {
+      font-size: 0.90rem;
+      display: block;
+      margin-top: 0.10rem;
     }
   }
 
-  .btn {
-    padding: 0.5rem 1rem;
+  .footer-balance {
+    color: #ccc;
+    font-size: 0.9rem;
+    display: flex !important; // Shown when logged in via JS
+    gap: 0.25rem;
+  }
+
+  // Hide large screen footer on small screens
+  .site-footer {
+    display: none;
   }
 }
 
-// Styles for larger screens
+// Larger screens - show normal footer, hide sticky footer
 @include bs.media-breakpoint-up(lg) {
-  footer {
-    display: none;
-  }
-  .footer-btn {
+  // Hide sticky footer on large screens
+  .sticky-footer {
     display: none;
   }
 
-  .listing {
-    padding: 2rem;
-    gap: 2rem;
+  // Show the normal site footer on large screens
+  .site-footer {
+    display: block;
+    color: #555;
+    text-align: center;
+
+    hr {
+      margin: 1rem 0;
+      border-color: #ccc;
+    }
+
+    .footer-text {
+      font-size: 1rem;
+      color: #939393;
+    }
   }
 }

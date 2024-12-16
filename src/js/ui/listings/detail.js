@@ -100,7 +100,7 @@ export async function initListingDetails() {
               />
               <h2 class="mb-0 text-truncate">${title}</h2>
             </div>
-            <p class="text-muted mb-0 text-time"><i class="fa-solid fa-clock"></i> ${timeDisplay}</p>
+            <p class="mb-0 text-time"><i class="fa-solid fa-clock"></i> ${timeDisplay}</p>
           </div>
           <div class="mb-4">${mediaContent}</div>
           <p><strong>Description:</strong> ${description}</p>
@@ -233,7 +233,7 @@ async function handleBidSubmission(listingId) {
     return;
   }
 
-  const userCredits = userProfile.credits; // Adjust based on actual profile data structure
+  const userCredits = userProfile.credits;
   if (bidAmount > userCredits) {
     alert(
       `You don't have enough credits. You have $${userCredits}, but tried to bid $${bidAmount}.`
@@ -248,8 +248,34 @@ async function handleBidSubmission(listingId) {
     await updateBids(listingId);
     alert("Your bid has been placed successfully!");
     bidInput.value = "";
+
+    // Fetch updated profile after successful bid
+    const updatedProfile = await fetchProfile();
+    if (updatedProfile) {
+      // Update localStorage with new credits
+      localStorage.setItem("credits", updatedProfile.credits);
+
+      // Update UI elements showing credits if they exist
+      const headerCredits = document.getElementById("user-credits");
+      if (headerCredits) {
+        headerCredits.textContent = `$${updatedProfile.credits}`;
+      }
+
+      const footerUserCredits = document.getElementById("footer-user-credits");
+      if (footerUserCredits) {
+        footerUserCredits.textContent = `$${updatedProfile.credits}`;
+      }
+
+      const sidebarUserCredits = document.getElementById(
+        "sidebar-user-credits"
+      );
+      if (sidebarUserCredits) {
+        sidebarUserCredits.textContent = `$${updatedProfile.credits}`;
+      }
+    }
   } catch (error) {
     console.error("Error placing bid:", error);
     alert("Error placing your bid. Please try again.");
   }
 }
+

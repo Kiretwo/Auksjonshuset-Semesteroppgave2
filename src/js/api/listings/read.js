@@ -4,12 +4,13 @@ import { API_AUCTION_LISTINGS } from "../constants.js";
 // Fetch all listings from api
 export async function fetchAllListings() {
   try {
-    const response = await fetch(`${API_AUCTION_LISTINGS}?_active=true`);
+    // Request listings sorted by the created field in descending order:
+    const response = await fetch(`${API_AUCTION_LISTINGS}?_active=true&sort=created&sortOrder=desc`);
     if (!response.ok) {
       throw new Error("Failed to fetch listings");
     }
     const data = await response.json();
-    return data;
+    return data.data;
   } catch (error) {
     console.error(error);
     throw error;

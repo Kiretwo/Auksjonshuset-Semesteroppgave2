@@ -3,26 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home | Auksjonshuset</title>
+    <title>Create Listing | Auksjonshuset</title>
     <link
       rel="icon"
       type="image/x-icon"
-      href="./images/greek-pillar(header+favicon).png"
+      href="/images/greek-pillar(header+favicon).png"
     />
     <script
       src="https://kit.fontawesome.com/d75c3894ae.js"
       crossorigin="anonymous"
     ></script>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
   </head>
-  <body data-page="home">
+  <body data-page="create-listing">
     <!-- Header -->
     <header class="py-2">
       <div class="container d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <a class="navbar-brand" href="/">
             <img
-              src="./images/greek-pillar(header+favicon).png"
+              src="/images/greek-pillar(header+favicon).png"
               alt="Auksjonshuset logo"
             />
           </a>
@@ -94,17 +94,60 @@
     </header>
 
     <!-- Main content of the page -->
-    <main class="home-main container">
-      <div
-        id="listings-container"
-        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1"
-      ></div>
-      <button
-        id="show-more-button"
-        class="btn btn-primary mx-auto d-block mt-4"
-      >
-        Show More Listings
-      </button>
+    <main id="main-create" class="container my-4">
+      <h2>Create a New Listing</h2>
+      <form id="createListingForm">
+        <div class="mb-3">
+          <label for="listingTitle" class="form-label">Title*</label>
+          <input type="text" id="listingTitle" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="listingDescription" class="form-label">Description</label>
+          <textarea
+            id="listingDescription"
+            class="form-control"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="listingTags" class="form-label"
+            >Tags (comma separated)</label
+          >
+          <input
+            type="text"
+            id="listingTags"
+            class="form-control"
+            placeholder="e.g. electronics, gadgets"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="listingMedia1" class="form-label">Image URL 1</label>
+          <input type="url" id="listingMedia1" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="listingMedia2" class="form-label">Image URL 2</label>
+          <input type="url" id="listingMedia2" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="listingMedia3" class="form-label">Image URL 3</label>
+          <input type="url" id="listingMedia3" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+          <label for="listingEndsAt" class="form-label">End Date & Time*</label>
+          <input
+            type="datetime-local"
+            id="listingEndsAt"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-success">Create Listing</button>
+      </form>
     </main>
 
     <!-- Normal footer for large screens -->

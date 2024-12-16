@@ -12,6 +12,8 @@ export default defineConfig({
         login: resolve(__dirname, "./auth/login/index.html"),
         register: resolve(__dirname, "./auth/register/index.html"),
         listingDetail: resolve(__dirname, "./listing/index.html"),
+        listingCreate: resolve(__dirname, "./listing/create/index.html"),
+        profile: resolve(__dirname, "./profile/index.html"),
         // Add other pages as needed
       },
     },

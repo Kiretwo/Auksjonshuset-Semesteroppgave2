@@ -3,26 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home | Auksjonshuset</title>
+    <title>Create Listing | Auksjonshuset</title>
     <link
       rel="icon"
       type="image/x-icon"
-      href="./images/greek-pillar(header+favicon).png"
+      href="/images/greek-pillar(header+favicon).png"
     />
     <script
       src="https://kit.fontawesome.com/d75c3894ae.js"
       crossorigin="anonymous"
     ></script>
-    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="/src/main.js"></script>
   </head>
-  <body data-page="home">
+  <body data-page="profile">
     <!-- Header -->
     <header class="py-2">
       <div class="container d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <a class="navbar-brand" href="/">
             <img
-              src="./images/greek-pillar(header+favicon).png"
+              src="/images/greek-pillar(header+favicon).png"
               alt="Auksjonshuset logo"
             />
           </a>
@@ -94,17 +94,56 @@
     </header>
 
     <!-- Main content of the page -->
-    <main class="home-main container">
-      <div
-        id="listings-container"
-        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1"
-      ></div>
-      <button
-        id="show-more-button"
-        class="btn btn-primary mx-auto d-block mt-4"
+    <main id="main-profile" class="container my-4">
+      <section id="profile">
+        <!-- Profile content will be dynamically injected here -->
+      </section>
+
+      <h2 class="mb-4">Listings by user</h2>
+
+      <section
+        id="user-listings"
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"
       >
-        Show More Listings
-      </button>
+        <!-- The user's listings will be dynamically injected here -->
+      </section>
+
+      <hr class="my-5" />
+
+      <h2>Update Profile</h2>
+      <form id="updateProfileForm">
+        <div class="mb-3">
+          <label for="profileBio" class="form-label">Bio</label>
+          <textarea
+            id="profileBio"
+            class="form-control"
+            rows="3"
+            placeholder="Enter your new bio..."
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="profileAvatarUrl" class="form-label">Avatar URL</label>
+          <input
+            type="url"
+            id="profileAvatarUrl"
+            class="form-control"
+            placeholder="https://example.com/avatar.jpg"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="profileBannerUrl" class="form-label">Banner URL</label>
+          <input
+            type="url"
+            id="profileBannerUrl"
+            class="form-control"
+            placeholder="https://example.com/banner.jpg"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Profile</button>
+      </form>
     </main>
 
     <!-- Normal footer for large screens -->

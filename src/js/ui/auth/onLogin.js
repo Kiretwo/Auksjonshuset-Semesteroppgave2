@@ -1,5 +1,6 @@
 import { Modal } from "bootstrap";
 import { loginUser } from "../../api/auth/login.js";
+import { fetchUserProfile } from "../../api/profile/read.js";
 
 export async function onLogin(event) {
   // Prevent the form from submitting the default way
@@ -15,10 +16,19 @@ export async function onLogin(event) {
   try {
     // Call the API to login the user
     const result = await loginUser(userData);
-
-    // Log the result and redirect the user to the home page
     console.log("Login successful:", result);
-    //window.location.href = "/";
+
+    // Fetch the user's profile to get the credits
+    const username = localStorage.getItem("username");
+    if (username) {
+      const profile = await fetchUserProfile(username);
+      if (profile && profile.credits != null) {
+        localStorage.setItem("credits", profile.credits);
+      }
+    }
+
+    // Reload the page after credits are stored
+    window.location.reload();
 
     // Reset the form
     form.reset();
@@ -26,7 +36,7 @@ export async function onLogin(event) {
     // Close the modal with a slight delay
     setTimeout(() => {
       const modal = Modal.getInstance(document.querySelector("#loginModal"));
-      modal.hide();
+      if (modal) modal.hide();
     }, 100);
   } catch (error) {
     console.error("Error logging in:", error);
