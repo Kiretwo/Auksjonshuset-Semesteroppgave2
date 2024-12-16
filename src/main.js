@@ -1,6 +1,7 @@
 import "bootstrap";
 import "./scss/main.scss";
 import { initHeader } from "./js/ui/components/header.js";
+import { initFooter } from "./js/ui/components/footer.js";
 import { initSidebar } from "./js/ui/components/sidebar.js";
 import { initSearch } from "./js/ui/components/search.js";
 import { setupAuthListeners } from "./js/ui/auth/authListener.js";
@@ -17,11 +18,12 @@ async function init() {
   const page = getCurrentPage();
 
   try {
-    initHeader();
-    initSidebar();
-    initSearch();
     setupAuthListeners();
     setLogoutListener();
+    initHeader();
+    initFooter();
+    initSidebar();
+    initSearch();
 
     switch (page) {
       case "home":
@@ -32,6 +34,14 @@ async function init() {
         const listingDetailsModule = await import("./js/ui/listings/detail.js");
         listingDetailsModule.initListingDetails();
         break;
+      case "create-listing":
+        const createListingModule = await import("./js/ui/listings/create.js");
+        createListingModule.initCreateListing();
+        break;
+      case "profile":
+        const profileModule = await import("./js/ui/profile/display.js");
+        profileModule.initProfile();
+        break;
       /*
       case "login":
         const loginModule = await import("./js/ui/login.js");
@@ -40,10 +50,6 @@ async function init() {
       case "register":
         const registerModule = await import("./js/ui/register.js");
         registerModule.init();
-        break;
-      case "profile":
-        const profileModule = await import("./ui/profile/profile.js");
-        profileModule.init();
         break;
       case "create-listing":
         const createListingModule = await import("./ui/create-listing/create-listing.js");

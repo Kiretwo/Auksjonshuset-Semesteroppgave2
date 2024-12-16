@@ -5,6 +5,7 @@ export function initHome() {
 
   const listingsContainer = "#listings-container";
   const showMoreButton = "#show-more-button";
+  const createButton = "#create-button";
 
   // Initial render
   renderListings(listingsContainer, showMoreButton);
